@@ -22,6 +22,7 @@ case $1 in
     cp nginx-$old_version/sneffets.ch* nginx-$version/
     cp -R nginx-$old_version/sites-* nginx-$version/
     cp nginx-$old_version/nginx.conf nginx-$version/
+    echo "$(/usr/local/sbin/nginx -t -c /usr/local/nginx/nginx.conf)"
     exit 0
     ;;
   --upgrade)
