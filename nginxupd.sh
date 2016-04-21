@@ -8,7 +8,12 @@ case $1 in
     else
       version=$2
     fi
-    old_version=$(ls -r /usr/local/ | grep nginx- | head -n 1)
+    old_version=$(ls -t /usr/local/ | grep nginx- | head -n 2 | tail -n 1)
+    echo -e "Upgrade from $old_version to $version ? [y/n]:"
+	read answer
+    if [ $answer = "n" ]; then
+	exit 1
+    fi
     cd /usr/local/src
     wget http://nginx.org/download/nginx-$version.tar.gz
     tar xfvz nginx-$version.tar.gz
@@ -33,7 +38,10 @@ case $1 in
     ;;
   --complete)
     kill -s QUIT $(sudo cat /run/nginx.pid.oldbin)
-    exit 1
+    exit 0
     ;;
   *)
     echo "usage: nginxupd --prepare <version>|--upgrade|--complete"
+    exit 1
+    ;;
+esac
