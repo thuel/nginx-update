@@ -31,9 +31,9 @@ case $1 in
     exit 0
     ;;
   --upgrade)
-    kill -s USR2 $(sudo cat /run/nginx.pid)
-    kill -s USR2 $(sudo cat /run/php5-fpm.pid) # zu prüfen, funktioniert hat es mit einem restart von nginx und php5-fpm
-    kill -s WINCH $(sudo cat /run/nginx.pid.oldbin)
+    kill -s USR2 $(cat /run/nginx.pid)
+    kill -s USR2 $(cat /run/php5-fpm.pid) # zu prüfen, funktioniert hat es mit einem restart von nginx und php5-fpm
+    kill -s WINCH $(cat /run/nginx.pid.oldbin)
     exit 0
     ;;
   --complete)
