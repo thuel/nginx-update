@@ -24,20 +24,20 @@ case $1 in
     cd /usr/local
     ln -snf /usr/local/nginx-$version nginx
     ln -snf /usr/local/nginx/sbin/nginx /usr/local/sbin/nginx
-    cp nginx-$old_version/sneffets.ch* nginx-$version/
-    cp -R nginx-$old_version/sites-* nginx-$version/
-    cp nginx-$old_version/nginx.conf nginx-$version/
-    echo "$(/usr/local/sbin/nginx -t -c /usr/local/nginx/nginx.conf)"
+    cp $old_version/sneffets.ch* nginx-$version/
+    cp -R $old_version/sites-* nginx-$version/
+    cp $old_version/nginx.conf nginx-$version/
+    echo "$(sudo /usr/local/sbin/nginx -t -c /usr/local/nginx/nginx.conf)"
     exit 0
     ;;
   --upgrade)
-    kill -s USR2 $(sudo cat /run/nginx.pid)
-    kill -s USR2 $(sudo cat /run/php5-fpm.pid) # zu prüfen, funktioniert hat es mit einem restart von nginx und php5-fpm
-    kill -s WINCH $(sudo cat /run/nginx.pid.oldbin)
+    kill -s USR2 $(cat /run/nginx.pid)
+    kill -s USR2 $(cat /run/php5-fpm.pid) # zu prüfen, funktioniert hat es mit einem restart von nginx und php5-fpm
+    kill -s WINCH $(cat /run/nginx.pid.oldbin)
     exit 0
     ;;
   --complete)
-    kill -s QUIT $(sudo cat /run/nginx.pid.oldbin)
+    kill -s QUIT $(cat /run/nginx.pid.oldbin)
     exit 0
     ;;
   *)
