@@ -8,7 +8,7 @@ case $1 in
     else
       version=$2
     fi
-    old_version=$(ls -t /usr/local/ | grep nginx- | head -n 2 | tail -n 1)
+    old_version=$(ls -rv /usr/local/ | grep nginx- | head -n 1)
     echo -e "Upgrade from $old_version to $version ? [y/n]:"
 	read answer
     if [ $answer = "n" ]; then
