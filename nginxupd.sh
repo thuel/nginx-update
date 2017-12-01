@@ -33,7 +33,7 @@ case $1 in
   --upgrade)
     kill -s USR2 $(cat /run/nginx.pid) && #last time pid.oldbin wasn't found without ampersand
     kill -s WINCH $(cat /run/nginx.pid.oldbin)
-    kill -s USR2 $(cat /run/php5-fpm.pid) # zu prüfen, funktioniert hat es mit einem restart von nginx und php5-fpm
+    kill -s USR2 $(cat /run/php/php7.0-fpm.pid) # zu prüfen, funktioniert hat es mit einem restart von nginx und php5-fpm
     exit 0
     ;;
   --complete)
